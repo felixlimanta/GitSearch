@@ -90,6 +90,19 @@ public class GitHubSearchUserQuery {
 
   public String generateUrl() {
     StringBuilder url = new StringBuilder(baseUrl + query);
+    switch (searchIn) {
+      case 1:
+        url.append("+in:login");
+        break;
+      case 2:
+        url.append("+in:email");
+        break;
+      case 3:
+        url.append("+in:fullname");
+        break;
+      default:
+        break;
+    }
     if (repo.used) {
       url.append("+repos:");
       url.append(repo.compOperator);

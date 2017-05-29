@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 public class JsonGetter {
   private static final int timeout = 10000;
   private String url;
+  private int status;
   private String rawJson;
 
   public JsonGetter(String url) {
@@ -36,6 +37,10 @@ public class JsonGetter {
     return prettifyJson(rawJson);
   }
 
+  public int getStatus() {
+    return status;
+  }
+
   public String getJson(int timeout) {
     HttpURLConnection c = null;
     try {
@@ -47,20 +52,16 @@ public class JsonGetter {
       c.setConnectTimeout(timeout);
       c.setReadTimeout(timeout);
       c.connect();
-      int status = c.getResponseCode();
+      status = c.getResponseCode();
 
-      switch (status) {
-        case 200:
-        case 201:
-          BufferedReader br = new BufferedReader(new InputStreamReader(c.getInputStream()));
-          StringBuilder sb = new StringBuilder();
-          String line;
-          while ((line = br.readLine()) != null) {
-            sb.append(line).append("\n");
-          }
-          br.close();
-          return sb.toString();
+      BufferedReader br = new BufferedReader(new InputStreamReader(c.getInputStream()));
+      StringBuilder sb = new StringBuilder();
+      String line;
+      while ((line = br.readLine()) != null) {
+        sb.append(line).append("\n");
       }
+      br.close();
+      return sb.toString();
     } catch (Exception ex) {
       Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
     } finally {
