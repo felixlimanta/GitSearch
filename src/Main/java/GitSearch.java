@@ -1,3 +1,5 @@
+package org.felixlimanta.gitsearch;
+
 import org.felixlimanta.gitsearch.controller.GitHubUserRepositoryGetter;
 import org.felixlimanta.gitsearch.controller.GitHubUserSearcher;
 import java.util.ArrayList;
