@@ -1,4 +1,4 @@
-package model;
+package org.felixlimanta.gitsearch.model;
 
 /**
  * Created by ASUS on 29/05/17.

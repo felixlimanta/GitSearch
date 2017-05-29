@@ -1,26 +1,25 @@
-package controller;
+package org.felixlimanta.gitsearch.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
-import model.GitHubSearchResponse;
-import model.GitHubUser;
+import org.felixlimanta.gitsearch.model.GitHubSearchResponse;
+import org.felixlimanta.gitsearch.model.GitHubUser;
 
 /**
  * Created by ASUS on 29/05/17.
  */
 public class GitHubUserSearcher {
   private static final int timeout = 100000;
-  private static GsonBuilder gsonBuilder;
-  private static Gson gson;
+  private static final Gson gson;
 
   private GitHubSearchResponse<GitHubUser> response;
   private String url;
   private String jsonString;
 
   static {
-    gsonBuilder = new GsonBuilder();
+    GsonBuilder gsonBuilder = new GsonBuilder();
     gsonBuilder.registerTypeAdapter(GitHubUser.class, new GitHubUserDeserializer());
     gson = gsonBuilder.create();
   }

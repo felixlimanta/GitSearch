@@ -1,4 +1,4 @@
-package controller;
+package org.felixlimanta.gitsearch.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 public class JsonGetter {
   private static final int timeout = 10000;
   private static final String token = "0472f0d730591e98f1ccd1eaba497202d2b690f0";
-  private String url;
+  private final String url;
   private int status;
   private String message;
   private String rawJson;

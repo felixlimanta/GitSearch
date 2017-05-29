@@ -1,4 +1,4 @@
-package controller;
+package org.felixlimanta.gitsearch.controller;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
@@ -6,8 +6,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import java.lang.reflect.Type;
-import model.GitHubRepository;
-import model.GitHubUser;
+import org.felixlimanta.gitsearch.model.GitHubRepository;
+import org.felixlimanta.gitsearch.model.GitHubUser;
 
 /**
  * Created by ASUS on 29/05/17.

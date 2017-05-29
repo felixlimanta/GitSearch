@@ -1,4 +1,4 @@
-package model;
+package org.felixlimanta.gitsearch.model;
 
 /**
  * Created by ASUS on 29/05/17.
@@ -18,10 +18,6 @@ public class GitHubRepository {
 
   public void setId(int id) {
     this.id = id;
-  }
-
-  public int getOwnerId() {
-    return ownerId;
   }
 
   public void setOwnerId(int ownerId) {

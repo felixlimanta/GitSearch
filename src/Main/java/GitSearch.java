@@ -1,14 +1,14 @@
-import controller.GitHubUserRepositoryGetter;
-import controller.GitHubUserSearcher;
+import org.felixlimanta.gitsearch.controller.GitHubUserRepositoryGetter;
+import org.felixlimanta.gitsearch.controller.GitHubUserSearcher;
 import java.util.ArrayList;
-import model.GitHubRepository;
-import model.GitHubSearchUserQuery;
-import model.GitHubUser;
+import org.felixlimanta.gitsearch.model.GitHubRepository;
+import org.felixlimanta.gitsearch.model.GitHubSearchUserQuery;
+import org.felixlimanta.gitsearch.model.GitHubUser;
 
 /**
  * Created by ASUS on 28/05/17.
  */
-public class Main {
+public class GitSearch {
   public static void main(String args[]) throws Exception {
     GitHubSearchUserQuery query = new GitHubSearchUserQuery("holy");
     query.setSearchIn(1);
