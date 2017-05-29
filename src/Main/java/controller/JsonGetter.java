@@ -16,8 +16,10 @@ import java.util.logging.Logger;
  */
 public class JsonGetter {
   private static final int timeout = 10000;
+  private static final String token = "0472f0d730591e98f1ccd1eaba497202d2b690f0";
   private String url;
   private int status;
+  private String message;
   private String rawJson;
 
   public JsonGetter(String url) {
@@ -41,18 +43,24 @@ public class JsonGetter {
     return status;
   }
 
+  public String getMessage() {
+    return message;
+  }
+
   public String getJson(int timeout) {
     HttpURLConnection c = null;
     try {
       URL u = new URL(url);
       c = (HttpURLConnection) u.openConnection();
       c.setRequestMethod("GET");
+      c.setRequestProperty("Authorization", "token " + token);
       c.setUseCaches(false);
       c.setAllowUserInteraction(false);
       c.setConnectTimeout(timeout);
       c.setReadTimeout(timeout);
       c.connect();
       status = c.getResponseCode();
+      message = c.getResponseMessage();
 
       BufferedReader br = new BufferedReader(new InputStreamReader(c.getInputStream()));
       StringBuilder sb = new StringBuilder();

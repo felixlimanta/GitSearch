@@ -36,6 +36,7 @@ public class GitHubUserRepositoryGetter {
 
   public void getJson() {
     JsonGetter g = new JsonGetter(reposUrl);
+    System.out.printf("%d %s\n", g.getStatus(), g.getMessage());
     jsonString = g.getRawJson();
   }
 
