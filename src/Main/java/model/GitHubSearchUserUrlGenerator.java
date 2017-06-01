@@ -3,7 +3,7 @@ package org.felixlimanta.gitsearch.model;
 /**
  * Created by ASUS on 29/05/17.
  */
-public class GitHubSearchUserQuery {
+public class GitHubSearchUserUrlGenerator {
   private class Filter {
     boolean used = false;
     String compOperator;
@@ -45,7 +45,7 @@ public class GitHubSearchUserQuery {
   private Filter repo;
   private Filter follower;
 
-  public GitHubSearchUserQuery(String query) {
+  public GitHubSearchUserUrlGenerator(String query) {
     this.query = query;
     searchIn = 0;
     repo = new Filter();

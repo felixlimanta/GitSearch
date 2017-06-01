@@ -10,13 +10,15 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 
 /**
  * Created by ASUS on 29/05/17.
  */
 public class JsonGetter {
   private static final int timeout = 10000;
-  private static final String token = "0472f0d730591e98f1ccd1eaba497202d2b690f0";
+  private static final String userAgent = "git-search";
+  private static final String token = "2guftCp8ETpJ0X7p7Wfy93+qOz98EpcGnRE8udK5TL+uMHI4a5x+SaxRosL/BZ3JMQOCTM5WoFQ=";
   private final String url;
   private int status;
   private String message;
@@ -47,13 +49,21 @@ public class JsonGetter {
     return message;
   }
 
+  public String getDecryptedToken() {
+    StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
+    encryptor.setPassword("GitSearch");
+    encryptor.setAlgorithm("PBEWithMD5AndDES");
+    return encryptor.decrypt(token);
+  }
+
   public String getJson(int timeout) {
     HttpURLConnection c = null;
     try {
       URL u = new URL(url);
       c = (HttpURLConnection) u.openConnection();
       c.setRequestMethod("GET");
-      c.setRequestProperty("Authorization", "token " + token);
+      c.setRequestProperty("User-Agent", userAgent);
+      c.setRequestProperty("Authorization", "token " + getDecryptedToken());
       c.setUseCaches(false);
       c.setAllowUserInteraction(false);
       c.setConnectTimeout(timeout);
