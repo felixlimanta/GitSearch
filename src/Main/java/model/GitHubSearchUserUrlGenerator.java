@@ -6,35 +6,17 @@ package org.felixlimanta.gitsearch.model;
 public class GitHubSearchUserUrlGenerator {
   private class Filter {
     boolean used = false;
-    String compOperator;
-    int compLimit;
+    String limit = "";
 
-    public void setFilter(boolean used) {
+    public void setUsed(boolean used) {
       this.used = used;
     }
 
-    public void setFilter(boolean used, String operator, int limit) {
-      this.used = used;
-      if (used) {
-        switch (operator) {
-          case "<":
-            compOperator = "%3c";
-            break;
-          case "<=":
-            compOperator = "%3c%3d";
-            break;
-          case ">":
-            compOperator = "%3e";
-            break;
-          case ">=":
-            compOperator = "%3e%3d";
-            break;
-          default:
-            compOperator = "%3d";
-            break;
-        }
-        compLimit = limit;
-      }
+    public void setLimit(String limit) { this.limit = limit; }
+
+    public void setFilter(boolean used, String limit) {
+      setUsed(used);
+      setLimit(limit);
     }
   }
 
@@ -73,19 +55,19 @@ public class GitHubSearchUserUrlGenerator {
   }
 
   public void setRepoUsed(boolean used) {
-    repo.setFilter(used);
+    repo.setUsed(used);
   }
 
-  public void setRepoFilter(boolean used, String operator, int limit) {
-    repo.setFilter(used, operator, limit);
+  public void setRepoFilter(boolean used, String limit) {
+    repo.setFilter(used, limit);
   }
 
   public void setFollowerUsed(boolean used) {
-    repo.setFilter(used);
+    follower.setUsed(used);
   }
 
-  public void setFollowerFilter(boolean used, String operator, int limit) {
-    follower.setFilter(used, operator, limit);
+  public void setFollowerFilter(boolean used, String limit) {
+    follower.setFilter(used, limit);
   }
 
   public String generateUrl() {
@@ -105,13 +87,11 @@ public class GitHubSearchUserUrlGenerator {
     }
     if (repo.used) {
       url.append("+repos:");
-      url.append(repo.compOperator);
-      url.append(repo.compLimit);
+      url.append(repo.limit);
     }
     if (follower.used) {
       url.append("+followers:");
-      url.append(follower.compOperator);
-      url.append(follower.compLimit);
+      url.append(follower.limit);
     }
     return url.toString();
   }

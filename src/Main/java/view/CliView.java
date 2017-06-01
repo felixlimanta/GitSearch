@@ -41,11 +41,12 @@ public class CliView {
     System.out.print("Limit repositories? [y/N] ");
     char repo = scan.next().charAt(0);
     if (repo == 'Y' || repo == 'y') {
-      System.out.print("Operator [= / > / < / >= / <=] ");
-      String opr = scan.nextLine();
+      System.out.printf("\t\ta: exactly a repositories\n");
+      System.out.printf("\t\ta..b: between a and b repositories\n");
+      System.out.printf("\t\t>a: more than a repositories. Operator: > / < / >= / >=\n");
       System.out.print("Limit: ");
-      int limit = scan.nextInt();
-      query.setRepoFilter(true, opr, limit);
+      String limit = scan.next();
+      query.setRepoFilter(true, limit);
     } else {
       query.setRepoUsed(false);
     }
@@ -54,17 +55,19 @@ public class CliView {
     System.out.print("Limit followers? [y/N] ");
     char follower = scan.next().charAt(0);
     if (follower == 'Y' || follower == 'y') {
-      System.out.print("Operator [= / > / < / >= / <=] ");
-      String opr = scan.nextLine();
+      System.out.printf("\t\ta: exactly a followers\n");
+      System.out.printf("\t\ta..b: between a and b followers\n");
+      System.out.printf("\t\t>a: more than a followers. Operator: > / < / >= / >=\n");
       System.out.print("Limit: ");
-      int limit = scan.nextInt();
-      query.setFollowerFilter(true, opr, limit);
+      String limit = scan.next();
+      query.setFollowerFilter(true, limit);
     } else {
       query.setFollowerUsed(false);
     }
     System.out.println();
 
     url = query.generateUrl();
+    System.out.println(url);
   }
 
   public void searchUsers() {
