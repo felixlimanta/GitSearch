@@ -4,22 +4,6 @@ package org.felixlimanta.gitsearch.model;
  * Created by ASUS on 29/05/17.
  */
 public class GitHubSearchUserUrlGenerator {
-  private class Filter {
-    boolean used = false;
-    String limit = "";
-
-    public void setUsed(boolean used) {
-      this.used = used;
-    }
-
-    public void setLimit(String limit) { this.limit = limit; }
-
-    public void setFilter(boolean used, String limit) {
-      setUsed(used);
-      setLimit(limit);
-    }
-  }
-
   private final String baseUrl = "https://api.github.com/search/users?q=";
   private String query;
   private int searchIn;
