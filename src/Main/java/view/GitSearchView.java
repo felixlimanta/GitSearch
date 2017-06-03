@@ -9,6 +9,16 @@ import org.felixlimanta.gitsearch.controller.GitSearchController;
 /**
  * Created by ASUS on 02/06/17.
  */
+
+/**
+ * GitSearch application main frame
+ *
+ * <p>Top-level container for all view panels</p>
+ *
+ * @author  Felix Limanta
+ * @version 1.0
+ * @since   2017-06-02
+ */
 public class GitSearchView extends JFrame {
   private SearchPanel searchPanelObj;
   private ResultsPanel resultsPanelObj;
@@ -21,8 +31,16 @@ public class GitSearchView extends JFrame {
   private JPanel resultsPanel;
   private JPanel userPanel;
 
+  /**
+   * Constructor
+   *
+   * <p>Sets up view components and launch application.</p>
+   *
+   * <p>Create a new GitSearchView object to launch application from main method.</p>
+   */
   public GitSearchView() {
     super("GitSearch");
+    resultsTabbedPane.setEnabledAt(1, false);
     setUpController();
 
     setContentPane(rootPanel);
@@ -31,12 +49,27 @@ public class GitSearchView extends JFrame {
     setVisible(true);
   }
 
+  /**
+   * Switches current tab to search results tab
+   */
   public void switchTabToSearchResults() {
     resultsTabbedPane.setSelectedIndex(0);
   }
 
+  /**
+   * Switches current tab to user repositories tab and enables it
+   */
   public void switchTabToUserRepo() {
+    resultsTabbedPane.setEnabledAt(1, true);
     resultsTabbedPane.setSelectedIndex(1);
+  }
+
+  /**
+   * Resets tab focus and disables user repositories tab
+   */
+  public void resetPanel() {
+    switchTabToSearchResults();
+    resultsTabbedPane.setEnabledAt(1, false);
   }
 
   private void createUIComponents() {

@@ -9,13 +9,34 @@ import org.felixlimanta.gitsearch.model.GitHubSearchUserUrlGenerator;
 import org.felixlimanta.gitsearch.model.GitHubUser;
 
 /**
- * Created by ASUS on 01/06/17.
+ * Command line interface for testing purposes.
+ *
+ * @author  Felix Limanta
+ * @version 0.5
+ * @since   2017-05-30
  */
 public class CliView {
+
+  /**
+   * Common Scanner object for console input
+   */
   private Scanner scan;
+
+  /**
+   * Search API URL
+   */
   private String url;
+
+  /**
+   * User search results
+   */
   private ArrayList<GitHubUser> users;
 
+  /**
+   * Constructor
+   *
+   * <p>Initializes application, then runs it once</p>
+   */
   public CliView() {
     scan = new Scanner(System.in);
     getUserInput();
@@ -23,7 +44,7 @@ public class CliView {
     getRepo();
   }
 
-  public void getUserInput() {
+  private void getUserInput() {
     System.out.print("Query: ");
     String queryString = scan.nextLine();
     GitHubSearchUserUrlGenerator query = new GitHubSearchUserUrlGenerator(queryString);
@@ -70,7 +91,7 @@ public class CliView {
     System.out.println(url);
   }
 
-  public void searchUsers() {
+  private void searchUsers() {
     GitHubUserSearcher g = new GitHubUserSearcher(url);
     g.retrieveDataFromGitHub();
 
@@ -81,7 +102,7 @@ public class CliView {
     System.out.println();
   }
 
-  public void getRepo() {
+  private void getRepo() {
     System.out.print("User to get repos: ");
     int i = scan.nextInt();
 

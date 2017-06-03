@@ -13,7 +13,13 @@ import org.felixlimanta.gitsearch.model.GitHubRepository;
 import org.felixlimanta.gitsearch.model.GitHubUser;
 
 /**
- * Created by ASUS on 02/06/17.
+ * User repositories panel
+ *
+ * <p>Displays repositories of a user</p>
+ *
+ * @author  Felix Limanta
+ * @version 1.0
+ * @since   2017-06-02
  */
 public class UserRepoPanel {
   private static final int minRows = 5;
@@ -26,14 +32,30 @@ public class UserRepoPanel {
   private DefaultTableModel tableModel;
   private JTable repoTable;
 
+  /**
+   * Constructor
+   *
+   * <p>Sets up listeners for Swing components</p>
+   */
   public UserRepoPanel() {
     setUpClickableTableListener();
   }
 
+  /**
+   * Root panel getter for nested panel purposes
+   *
+   * @return Root JPanel for SearchPanel
+   */
   public JPanel getRootPanel() {
     return rootPanel;
   }
 
+  /**
+   * Displays username and repositories count, then populates repositories table with
+   * repositories of user
+   *
+   * @param user The user to be displayed
+   */
   public void populateRepoPanel(GitHubUser user) {
     usernameLabel.setEnabled(true);
     usernameLabel.setText(user.getUsername());
@@ -51,6 +73,11 @@ public class UserRepoPanel {
     }
   }
 
+  /**
+   * Resets panel
+   *
+   * <p>Resets username and repository count labels, clears repositories table</p>
+   */
   public void resetPanel() {
     usernameLabel.setEnabled(false);
     usernameLabel.setText("username");
@@ -102,8 +129,12 @@ public class UserRepoPanel {
       if (Desktop.isDesktopSupported()) {
         try {
           Desktop.getDesktop().browse(uri);
-        } catch (Exception ex) { }
+        } catch (Exception ex) {
+          ex.printStackTrace();
+        }
       }
-    } catch (Exception ex) { }
+    } catch (Exception ex) {
+      ex.printStackTrace();
+    }
   }
 }

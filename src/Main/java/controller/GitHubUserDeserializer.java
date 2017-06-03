@@ -9,7 +9,13 @@ import java.lang.reflect.Type;
 import org.felixlimanta.gitsearch.model.GitHubUser;
 
 /**
- * Created by ASUS on 29/05/17.
+ * Deserializer for GitHubUser for use with Google Gson
+ *
+ * @author  Felix Limanta
+ * @version 1.0
+ * @since   2017-05-29
+ * @see     GitHubUser
+ * @see     <a href="https://github.com/google/gson/blob/master/UserGuide.md#TOC-Writing-a-Deserializer">Gson deserializer documentation</a>
  */
 public class GitHubUserDeserializer implements JsonDeserializer<GitHubUser> {
   public GitHubUser deserialize(final JsonElement json, final Type typeOfT,

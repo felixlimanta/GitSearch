@@ -8,50 +8,116 @@ import org.felixlimanta.gitsearch.view.SearchPanel;
 import org.felixlimanta.gitsearch.view.UserRepoPanel;
 
 /**
- * Created by ASUS on 03/06/17.
+ * Central controller for the whole application
+ *
+ * @author  Felix Limanta
+ * @version 1.0
+ * @since   2017-06-03
  */
 public class GitSearchController {
+
+  /**
+   * GitSearch application main frame
+   */
   private GitSearchView gitSearchView;
+
+  /**
+   * Search panel object
+   *
+   * @see SearchPanel
+   */
   private SearchPanel searchPanel;
+
+  /**
+   * Results panel object
+   *
+   * @see ResultsPanel
+   */
   private ResultsPanel resultsPanel;
+
+  /**
+   * User repositories panel object
+   *
+   * @see UserRepoPanel
+   */
   private UserRepoPanel userRepoPanel;
 
+  /**
+   * GitHub User Searcher object
+   *
+   * @see GitHubUserSearcher
+   */
   private GitHubUserSearcher userSearcher;
+
+  /**
+   * GitHub user repositories getter object
+   *
+   * @see GitHubUserRepositoryGetter
+   */
   private GitHubUserRepositoryGetter repoGetter;
 
+  /**
+   * GitSearch main frame setter
+   *
+   * @param gitSearchView GitSearch main frame
+   */
   public void setGitSearchView(GitSearchView gitSearchView) {
     this.gitSearchView = gitSearchView;
   }
 
+  /**
+   * Search panel setter
+   *
+   * @param searchPanel Search panel
+   */
   public void setSearchPanel(SearchPanel searchPanel) {
     this.searchPanel = searchPanel;
   }
 
+  /**
+   * Results panel setter
+   *
+   * @param resultsPanel Results panel
+   */
   public void setResultsPanel(ResultsPanel resultsPanel) {
     this.resultsPanel = resultsPanel;
   }
 
+  /**
+   * User repositories panel setter
+   *
+   * @param userRepoPanel User repositories panel
+   */
   public void setUserRepoPanel(UserRepoPanel userRepoPanel) {
     this.userRepoPanel = userRepoPanel;
   }
 
+  /**
+   * Controls searching users
+   */
   public void searchUsers() {
     String searchUrl = getSearchUrlFromView();
     retrieveUserSearchDataFromGitHub(searchUrl);
     displaySearchResultsToView();
   }
 
+  /**
+   * Controls getting user repositories
+   */
   public void getRepos() {
     GitHubUser user = getUser();
     retrieveReposFromGitHub(user);
     displayReposToView(user);
   }
 
+  /**
+   * Controls resetting application view
+   */
   public void resetView() {
     searchPanel.resetPanel();
     resultsPanel.resetPanel();
     userRepoPanel.resetPanel();
-    gitSearchView.switchTabToSearchResults();
+    gitSearchView.resetPanel();
   }
 
   private String getSearchUrlFromView() {

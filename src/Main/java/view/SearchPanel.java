@@ -17,14 +17,20 @@ import org.felixlimanta.gitsearch.controller.GitSearchController;
 import org.felixlimanta.gitsearch.model.Filter;
 
 /**
- * Created by ASUS on 02/06/17.
+ * Search panel.
+ *
+ * <p>Receives query input</p>
+ *
+ * @author  Felix Limanta
+ * @version 1.0
+ * @since   2017-06-02
  */
 public class SearchPanel  {
 
   private JPanel rootPanel;
-  
-  private JTextField queryTextField;
+
   private JLabel queryLabel;
+  private JTextField queryTextField;
 
   private JLabel searchInLabel;
   private JRadioButton searchInAllRadioButton;
@@ -49,20 +55,41 @@ public class SearchPanel  {
 
   private GitSearchController control;
 
+  /**
+   * Constructor
+   *
+   * <p>Sets up listeners for Swing components</p>
+   */
   public SearchPanel() {
     setUpRepoListener();
     setUpFollowersListener();
     setUpButtonsListener();
   }
 
+  /**
+   * Root panel getter for nested panel purposes
+   *
+   * @return Root JPanel for SearchPanel
+   */
   public JPanel getRootPanel() {
     return rootPanel;
   }
 
+  /**
+   * Query getter
+   *
+   * @return Text in query text field
+   */
   public String getQuery() {
     return queryTextField.getText();
   }
 
+  /**
+   * searchIn getter
+   *
+   * @return searchIn value based on radio button selection
+   * @see org.felixlimanta.gitsearch.model.GitHubSearchUserUrlGenerator#searchIn
+   */
   public int getSearchIn() {
     if (searchInUsernamesRadioButton.isSelected()) {
       return 1;
@@ -75,38 +102,41 @@ public class SearchPanel  {
     }
   }
 
+  /**
+   * Repository filter getter
+   *
+   * @return Filter object for repository count
+   */
   public Filter getRepoFilter() {
     return getFilter(limitRepoCheckBox, limitRepoOprComboBox,
         limitRepoLowerLimitSpinner, limitRepoUpperLimitSpinner);
   }
-  
+
+  /**
+   * Follower filter getter
+   *
+   * @return Filter object for follower filter
+   */
   public Filter getFollowerFilter() {
     return getFilter(limitFollowersCheckBox, limitFollowersOprComboBox,
         limitFollowersLowerLimitSpinner, limitFollowersUpperLimitSpinner);
   }
-  
-  public Filter getFilter(JCheckBox checkBox, JComboBox comboBox, JSpinner lower, JSpinner upper) {
-    boolean used = checkBox.isSelected();
-    String limit = "";
-    if (used) {
-      String label = comboBox.getItemAt(comboBox.getSelectedIndex()).toString();
-      if (label.equals("=")) {
-        limit = lower.getValue().toString();
-      } else if (label.equals("range")) {
-        int min = (int) lower.getValue();
-        int max = (int) upper.getValue();
-        limit = min + ".." + max;
-      } else {
-        limit = label + lower.getValue().toString();
-      }
-    }
-    return new Filter(used, limit);
-  }
 
+  /**
+   * Control setter
+   *
+   * @param control Top-level controller object
+   */
   public void setControl(GitSearchController control) {
     this.control = control;
   }
 
+  /**
+   * Resets panel
+   *
+   * <p>Clears text fields, resets radio button and check box selection, resets value and
+   * enabledness of components</p>
+   */
   public void resetPanel() {
     queryTextField.setText("");
     searchInAllRadioButton.setSelected(true);
@@ -188,4 +218,21 @@ public class SearchPanel  {
     });
   }
 
+  private Filter getFilter(JCheckBox checkBox, JComboBox comboBox, JSpinner lower, JSpinner upper) {
+    boolean used = checkBox.isSelected();
+    String limit = "";
+    if (used) {
+      String label = comboBox.getItemAt(comboBox.getSelectedIndex()).toString();
+      if (label.equals("=")) {
+        limit = lower.getValue().toString();
+      } else if (label.equals("range")) {
+        int min = (int) lower.getValue();
+        int max = (int) upper.getValue();
+        limit = min + ".." + max;
+      } else {
+        limit = label + lower.getValue().toString();
+      }
+    }
+    return new Filter(used, limit);
+  }
 }

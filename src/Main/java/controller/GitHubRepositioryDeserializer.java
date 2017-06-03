@@ -10,7 +10,13 @@ import org.felixlimanta.gitsearch.model.GitHubRepository;
 import org.felixlimanta.gitsearch.model.GitHubUser;
 
 /**
- * Created by ASUS on 29/05/17.
+ * Deserializer for GitHubRepository for use with Google Gson
+ *
+ * @author  Felix Limanta
+ * @version 1.0
+ * @since   2017-05-29
+ * @see     GitHubRepository
+ * @see     <a href="https://github.com/google/gson/blob/master/UserGuide.md#TOC-Writing-a-Deserializer">Gson deserializer documentation</a>
  */
 public class GitHubRepositioryDeserializer implements JsonDeserializer<GitHubRepository> {
   public GitHubRepository deserialize(final JsonElement json, final Type typeOfT,
