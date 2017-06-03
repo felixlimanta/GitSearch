@@ -13,6 +13,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
+import org.felixlimanta.gitsearch.controller.UserSearchController;
+import org.felixlimanta.gitsearch.model.Filter;
 
 /**
  * Created by ASUS on 02/06/17.
@@ -45,13 +47,79 @@ public class SearchPanel  {
   private JButton searchButton;
   private JButton resetButton;
 
+  private UserSearchController control;
+
   public SearchPanel() {
     setUpRepoListener();
     setUpFollowersListener();
+    setUpSearchButtonListener();
   }
 
   public JPanel getRootPanel() {
     return rootPanel;
+  }
+
+  public String getQuery() {
+    return queryTextField.getText();
+  }
+
+  public int getSearchIn() {
+    if (searchInUsernamesRadioButton.isSelected()) {
+      return 1;
+    } else if (searchInEmailRadioButton.isSelected()) {
+      return 2;
+    } else if (searchInFullNamesRadioButton.isSelected()) {
+      return 3;
+    } else {
+      return 0;
+    }
+  }
+
+  public Filter getRepoFilter() {
+    return getFilter(limitRepoCheckBox, limitRepoOprComboBox,
+        limitRepoLowerLimitSpinner, limitRepoUpperLimitSpinner);
+  }
+  
+  public Filter getFollowerFilter() {
+    return getFilter(limitFollowersCheckBox, limitFollowersOprComboBox,
+        limitFollowersLowerLimitSpinner, limitFollowersUpperLimitSpinner);
+  }
+  
+  public Filter getFilter(JCheckBox checkBox, JComboBox comboBox, JSpinner lower, JSpinner upper) {
+    boolean used = checkBox.isSelected();
+    String limit = "";
+    if (used) {
+      String label = comboBox.getItemAt(comboBox.getSelectedIndex()).toString();
+      if (label.equals("=")) {
+        limit = lower.getValue().toString();
+      } else if (label.equals("range")) {
+        int min = (int) lower.getValue();
+        int max = (int) upper.getValue();
+        limit = min + ".." + max;
+      } else {
+        limit = label + lower.getValue().toString();
+      }
+    }
+    return new Filter(used, limit);
+  }
+
+  public void setControl(UserSearchController control) {
+    this.control = control;
+  }
+
+  public void resetPanel() {
+    queryTextField.setText("");
+    searchInAllRadioButton.setSelected(true);
+    
+    limitRepoCheckBox.setSelected(false);
+    limitRepoOprComboBox.setSelectedIndex(0);
+    limitRepoLowerLimitSpinner.setValue(0);
+    limitRepoUpperLimitSpinner.setValue(10000);
+
+    limitFollowersCheckBox.setSelected(false);
+    limitFollowersOprComboBox.setSelectedIndex(0);
+    limitFollowersLowerLimitSpinner.setValue(0);
+    limitFollowersUpperLimitSpinner.setValue(10000);
   }
 
   private void createUIComponents() {
@@ -93,11 +161,21 @@ public class SearchPanel  {
     comboBox.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        String label = (String) comboBox.getItemAt(
-            comboBox.getSelectedIndex());
+        String label = (String) comboBox.getItemAt(comboBox.getSelectedIndex());
         boolean range = label.equals("range");
         to.setEnabled(range);
         upper.setEnabled(range);
+      }
+    });
+  }
+
+  private void setUpSearchButtonListener() {
+    searchButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        if (control != null) {
+          control.searchUsers();
+        }
       }
     });
   }

@@ -46,12 +46,20 @@ public class GitHubSearchUserUrlGenerator {
     repo.setFilter(used, limit);
   }
 
+  public void setRepoFilter(Filter filter) {
+    repo.setFilter(filter);
+  }
+
   public void setFollowerUsed(boolean used) {
     follower.setUsed(used);
   }
 
   public void setFollowerFilter(boolean used, String limit) {
     follower.setFilter(used, limit);
+  }
+
+  public void setFollowerFilter(Filter filter) {
+    follower.setFilter(filter);
   }
 
   public String generateUrl() {
@@ -69,13 +77,13 @@ public class GitHubSearchUserUrlGenerator {
       default:
         break;
     }
-    if (repo.used) {
+    if (repo.getUsed()) {
       url.append("+repos:");
-      url.append(repo.limit);
+      url.append(repo.getLimit());
     }
-    if (follower.used) {
+    if (follower.getUsed()) {
       url.append("+followers:");
-      url.append(follower.limit);
+      url.append(follower.getLimit());
     }
     return url.toString();
   }
