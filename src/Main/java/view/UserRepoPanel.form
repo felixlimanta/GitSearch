@@ -10,16 +10,17 @@
     <children>
       <component id="47a6d" class="javax.swing.JLabel" binding="usernameLabel">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="10" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <enabled value="false"/>
+          <font size="20"/>
           <text value="username"/>
         </properties>
       </component>
       <component id="b59c8" class="javax.swing.JLabel" binding="repoCountLabel">
         <constraints>
-          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="6" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <enabled value="false"/>
@@ -40,7 +41,9 @@
           <component id="3600a" class="javax.swing.JTable" binding="repoTable" custom-create="true">
             <constraints/>
             <properties>
-              <enabled value="true"/>
+              <autoResizeMode value="4"/>
+              <columnSelectionAllowed value="false"/>
+              <enabled value="false"/>
             </properties>
           </component>
         </children>

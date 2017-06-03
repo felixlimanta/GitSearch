@@ -13,7 +13,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
-import org.felixlimanta.gitsearch.controller.UserSearchController;
+import org.felixlimanta.gitsearch.controller.GitSearchController;
 import org.felixlimanta.gitsearch.model.Filter;
 
 /**
@@ -47,12 +47,12 @@ public class SearchPanel  {
   private JButton searchButton;
   private JButton resetButton;
 
-  private UserSearchController control;
+  private GitSearchController control;
 
   public SearchPanel() {
     setUpRepoListener();
     setUpFollowersListener();
-    setUpSearchButtonListener();
+    setUpButtonsListener();
   }
 
   public JPanel getRootPanel() {
@@ -103,7 +103,7 @@ public class SearchPanel  {
     return new Filter(used, limit);
   }
 
-  public void setControl(UserSearchController control) {
+  public void setControl(GitSearchController control) {
     this.control = control;
   }
 
@@ -169,7 +169,7 @@ public class SearchPanel  {
     });
   }
 
-  private void setUpSearchButtonListener() {
+  private void setUpButtonsListener() {
     searchButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -178,5 +178,14 @@ public class SearchPanel  {
         }
       }
     });
+    resetButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        if (control != null) {
+          control.resetView();
+        }
+      }
+    });
   }
+
 }

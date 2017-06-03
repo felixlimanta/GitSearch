@@ -1,5 +1,7 @@
 package org.felixlimanta.gitsearch.view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -8,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import org.felixlimanta.gitsearch.controller.GitSearchController;
 import org.felixlimanta.gitsearch.model.GitHubUser;
 
 /**
@@ -22,8 +25,43 @@ public class ResultsPanel {
   private DefaultListModel<String> listModel;
   private JList<String> resultsList;
 
-  public ResultsPanel() {
+  private GitSearchController control;
 
+  public ResultsPanel() {
+    setUpListListener();
+    setUpGetRepoButtonListener();
+  }
+
+  public JPanel getRootPanel() {
+    return rootPanel;
+  }
+
+  public int getSelectedUserIndex() {
+    return resultsList.getSelectedIndex();
+  }
+
+  public void setControl(GitSearchController control) {
+    this.control = control;
+  }
+
+  public void populateResultsList(ArrayList<GitHubUser> result) {
+    listModel.clear();
+    for (GitHubUser u: result) {
+      listModel.addElement(u.getUsername());
+    }
+  }
+
+  public void resetPanel() {
+    listModel.clear();
+    getRepositoriesButton.setEnabled(false);
+  }
+
+  private void createUIComponents() {
+    listModel = new DefaultListModel<>();
+    resultsList = new JList<>(listModel);
+  }
+
+  private void setUpListListener() {
     resultsList.addListSelectionListener(new ListSelectionListener() {
       @Override
       public void valueChanged(ListSelectionEvent e) {
@@ -34,19 +72,14 @@ public class ResultsPanel {
     });
   }
 
-  public JPanel getRootPanel() {
-    return rootPanel;
-  }
-
-  public void setResultsList(ArrayList<GitHubUser> result) {
-    listModel.clear();
-    for (GitHubUser u: result) {
-      listModel.addElement(u.getUsername());
-    }
-  }
-
-  private void createUIComponents() {
-    listModel = new DefaultListModel<>();
-    resultsList = new JList<>(listModel);
+  private void setUpGetRepoButtonListener() {
+    getRepositoriesButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        if (control != null) {
+          control.getRepos();
+        }
+      }
+    });
   }
 }
