@@ -37,12 +37,30 @@ public class GitHubSearchResponse<T> {
   }
 
   /**
+   * Total count setter
+   *
+   * @param totalCount Number of results
+   */
+  public void setTotalCount(int totalCount) {
+    this.totalCount = totalCount;
+  }
+
+  /**
    * Completeness of results getter.
    *
    * @return  Whether there are incomplete results or not
    */
   public boolean isIncompleteResults() {
     return incompleteResults;
+  }
+
+  /**
+   * Completeness of results setter.
+   *
+   * @param incompleteResults Whether there are incomplete results or not
+   */
+  public void setIncompleteResults(boolean incompleteResults) {
+    this.incompleteResults = incompleteResults;
   }
 
   /**

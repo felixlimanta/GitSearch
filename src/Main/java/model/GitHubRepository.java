@@ -63,6 +63,15 @@ public class GitHubRepository {
   }
 
   /**
+   * Owner ID getter
+   *
+   * @return ID of repository owner
+   */
+  public int getOwnerId() {
+    return ownerId;
+  }
+
+  /**
    * Owner ID setter.
    *
    * @param ownerId ID of repository owner.

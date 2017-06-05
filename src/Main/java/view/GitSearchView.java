@@ -7,10 +7,6 @@ import javax.swing.WindowConstants;
 import org.felixlimanta.gitsearch.controller.GitSearchController;
 
 /**
- * Created by ASUS on 02/06/17.
- */
-
-/**
  * GitSearch application main frame
  *
  * <p>Top-level container for all view panels</p>

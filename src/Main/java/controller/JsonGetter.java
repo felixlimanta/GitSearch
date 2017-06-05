@@ -41,7 +41,7 @@ public class JsonGetter {
   /**
    * Response from HTML <code>GET</code>
    */
-  private String rawJson;
+  private final String rawJson;
 
   /**
    * Constructor
