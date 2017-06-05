@@ -17,7 +17,7 @@ import org.felixlimanta.gitsearch.model.GitHubUser;
  * @see     GitHubUser
  * @see     <a href="https://github.com/google/gson/blob/master/UserGuide.md#TOC-Writing-a-Deserializer">Gson deserializer documentation</a>
  */
-public class GitHubUserDeserializer implements JsonDeserializer<GitHubUser> {
+class GitHubUserDeserializer implements JsonDeserializer<GitHubUser> {
   public GitHubUser deserialize(final JsonElement json, final Type typeOfT,
       final JsonDeserializationContext context) throws JsonParseException {
     final JsonObject jsonObject = json.getAsJsonObject();

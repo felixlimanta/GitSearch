@@ -42,6 +42,7 @@ public class GitHubUserSearcher extends GitHubApiGetter {
   public void deserializeJson() {
     Type type = new TypeToken<GitHubSearchResponse<GitHubUser>>() {}.getType();
     response = gson.fromJson(jsonString, type);
+    response.setTotalCount(response.getItems().size());
   }
 
   /**

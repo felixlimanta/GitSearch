@@ -1,15 +1,11 @@
 package org.felixlimanta.gitsearch.view;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import org.felixlimanta.gitsearch.controller.GitSearchController;
 import org.felixlimanta.gitsearch.model.GitHubUser;
 
@@ -98,23 +94,17 @@ public class ResultsPanel {
   }
 
   private void setUpListListener() {
-    resultsList.addListSelectionListener(new ListSelectionListener() {
-      @Override
-      public void valueChanged(ListSelectionEvent e) {
-        if (!e.getValueIsAdjusting()) {
-          getRepositoriesButton.setEnabled(resultsList.getSelectedIndex() != -1);
-        }
+    resultsList.addListSelectionListener(e -> {
+      if (!e.getValueIsAdjusting()) {
+        getRepositoriesButton.setEnabled(resultsList.getSelectedIndex() != -1);
       }
     });
   }
 
   private void setUpGetRepoButtonListener() {
-    getRepositoriesButton.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        if (control != null) {
-          control.getRepos();
-        }
+    getRepositoriesButton.addActionListener(e -> {
+      if (control != null) {
+        control.getRepos();
       }
     });
   }

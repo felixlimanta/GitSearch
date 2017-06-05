@@ -22,7 +22,7 @@ public abstract class GitHubApiGetter {
   /**
    * Source URL for GET operation
    */
-  protected String url;
+  private String url;
 
   /**
    * JSON string from GET operation

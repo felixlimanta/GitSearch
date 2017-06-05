@@ -20,7 +20,7 @@ public class CliView {
   /**
    * Common Scanner object for console input
    */
-  private Scanner scan;
+  private final Scanner scan;
 
   /**
    * Search API URL

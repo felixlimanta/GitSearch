@@ -1,9 +1,6 @@
 package org.felixlimanta.gitsearch.view;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -176,44 +173,32 @@ public class SearchPanel  {
   
   private void setUpFilterListener(JCheckBox checkBox, JComboBox comboBox, JLabel to,
       JSpinner lower, JSpinner upper) {
-    checkBox.addItemListener(new ItemListener() {
-      @Override
-      public void itemStateChanged(ItemEvent e) {
-        boolean checked = e.getStateChange() == ItemEvent.SELECTED;
-        String label = comboBox.getItemAt(comboBox.getSelectedIndex()).toString();
-        boolean range = label.equals("range");
-        comboBox.setEnabled(checked);
-        lower.setEnabled(checked);
-        to.setEnabled(checked && range);
-        upper.setEnabled(checked && range);
-      }
+    checkBox.addItemListener(e -> {
+      boolean checked = e.getStateChange() == ItemEvent.SELECTED;
+      String label = comboBox.getItemAt(comboBox.getSelectedIndex()).toString();
+      boolean range = label.equals("range");
+      comboBox.setEnabled(checked);
+      lower.setEnabled(checked);
+      to.setEnabled(checked && range);
+      upper.setEnabled(checked && range);
     });
-    comboBox.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        String label = (String) comboBox.getItemAt(comboBox.getSelectedIndex());
-        boolean range = label.equals("range");
-        to.setEnabled(range);
-        upper.setEnabled(range);
-      }
+    comboBox.addActionListener(e -> {
+      String label = (String) comboBox.getItemAt(comboBox.getSelectedIndex());
+      boolean range = label.equals("range");
+      to.setEnabled(range);
+      upper.setEnabled(range);
     });
   }
 
   private void setUpButtonsListener() {
-    searchButton.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        if (control != null) {
-          control.searchUsers();
-        }
+    searchButton.addActionListener(e -> {
+      if (control != null) {
+        control.searchUsers();
       }
     });
-    resetButton.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        if (control != null) {
-          control.resetView();
-        }
+    resetButton.addActionListener(e -> {
+      if (control != null) {
+        control.resetView();
       }
     });
   }
@@ -223,14 +208,18 @@ public class SearchPanel  {
     String limit = "";
     if (used) {
       String label = comboBox.getItemAt(comboBox.getSelectedIndex()).toString();
-      if (label.equals("=")) {
-        limit = lower.getValue().toString();
-      } else if (label.equals("range")) {
-        int min = (int) lower.getValue();
-        int max = (int) upper.getValue();
-        limit = min + ".." + max;
-      } else {
-        limit = label + lower.getValue().toString();
+      switch (label) {
+        case "=":
+          limit = lower.getValue().toString();
+          break;
+        case "range":
+          int min = (int) lower.getValue();
+          int max = (int) upper.getValue();
+          limit = min + ".." + max;
+          break;
+        default:
+          limit = label + lower.getValue().toString();
+          break;
       }
     }
     return new Filter(used, limit);

@@ -7,6 +7,7 @@ package org.felixlimanta.gitsearch.model;
  * @version 1.0
  * @since   2017-05-29
  */
+@SuppressWarnings("ALL")
 public class GitHubSearchUserUrlGenerator {
   private final String baseUrl = "https://api.github.com/search/users?q=";
 
@@ -93,6 +94,15 @@ public class GitHubSearchUserUrlGenerator {
   }
 
   /**
+   * Repository filter getter.
+   *
+   * @return Repository filter
+   */
+  public Filter getRepoFilter() {
+    return repo;
+  }
+
+  /**
    * Repository usage filter setter.
    * 
    * @param used Whether or not repositories are filtered
@@ -118,6 +128,15 @@ public class GitHubSearchUserUrlGenerator {
    */
   public void setRepoFilter(Filter filter) {
     repo.setFilter(filter);
+  }
+
+  /**
+   * Follower filter getter.
+   *
+   * @return Follower filter
+   */
+  public Filter getFollowerFilter() {
+    return follower;
   }
 
   /**
