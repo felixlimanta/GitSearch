@@ -43,3 +43,30 @@ A request for individual resources will elicit a detailed response typically con
 This application specifically uses the **GitHub Search API**. This particular API is used to perform specific searches on resources based on a search query (user, files on repositories, etc.) and returns a list of items based on the input query. Each query produces a maximum of 1000 results, sorted on relevance by default unless specified otherwise. Requests are limited to 30 authenticated requests and 10 unauthenticated requests per minute.
 
 [More on GitHub Search API](https://developer.github.com/v3/search/)
+
+-----
+## Application Features
+
+![Application GUI][ss001]
+
+**GitSearch** allows searching for users based on their usernames, email addresses, full names, or all of them. Searching can be filtered through their number of repositories or followers.
+
+![Search query inputted][ss002]
+
+Repositories and followers can be filtered with an exact number (the `=` operator), a comparison operator (the `>`, `>=`, `<`, and `<=` operators), or within a range of numbers (inclusive).
+
+![Search results displayed][ss004]
+
+Search results will be displayed in the list in the lower panel. Select a username to retrieve their repositories.
+
+![Repositories displayed][ss005]
+
+Repositories will be displayed in a different tab in the lower panel. In case the cell is not large enough to fully display the contents of the cell, hovering over it will display a tooltip which contains the full contents of the cell. Double-clicking the repository URL will open the URL in your desktop browser.
+
+The search results will still be available in the first tab. Selecting a different username, then retrieving their repositories will overwrite the repositories of the currently retrieved user. Similiarly, searching for a new query will overwrite the current search results, though the retrieved repositories will persist until another user has their repositories retrieved.
+
+[ss001]: docs/readme_resources/screenshot_001.png
+[ss002]: docs/readme_resources/screenshot_002.png
+[ss003]: docs/readme_resources/screenshot_003.png
+[ss004]: docs/readme_resources/screenshot_004.png
+[ss005]: docs/readme_resources/screenshot_005.png
