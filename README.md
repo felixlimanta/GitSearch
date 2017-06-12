@@ -1,5 +1,4 @@
-# GitSearch
-Java-based GitHub user finder
+![GitSearch: Java-based GitHub user finder][cover]
 
 This application uses **GitHub API** accesed through **REST**.
 
@@ -76,6 +75,7 @@ The search results will still be available in the first tab. Selecting a differe
 [Javadoc](https://felixlimanta.github.io/GitSearch/javadoc/index.html)
 
 [jar]: https://github.com/felixlimanta/GitSearch/raw/master/GitSearch.jar
+[cover]: docs/readme_resources/cover.png
 [ss001]: docs/readme_resources/screenshot_001.png
 [ss002]: docs/readme_resources/screenshot_002.png
 [ss003]: docs/readme_resources/screenshot_003.png
