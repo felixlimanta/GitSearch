@@ -3,6 +3,9 @@ Java-based GitHub user finder
 
 This application uses **GitHub API** accesed through **REST**.
 
+## Quick start
+Download [GitSearch.jar][jar] and run it.
+
 ## JSON, REST, and GitHub API
 ### JSON
 **JavaScript Object Notation** or **JSON** is a lightweight data-interchange format easily readable/writable by both humans and computers. JSON is language-independent, but uses conventions reminiscent of the C-family language (C, C++, C#, Java, JavaScript, Perl, Python, etc.). These properties make JSON an ideal data-interchange language.
@@ -65,6 +68,14 @@ Repositories will be displayed in a different tab in the lower panel. In case th
 
 The search results will still be available in the first tab. Selecting a different username, then retrieving their repositories will overwrite the repositories of the currently retrieved user. Similiarly, searching for a new query will overwrite the current search results, though the retrieved repositories will persist until another user has their repositories retrieved.
 
+### Additional Information
+[Project specification](https://github.com/felixlimanta/GitSearch/blob/master/docs/Project%201%20Ca%20Labpro.pdf)
+
+[Class diagrams](https://github.com/felixlimanta/GitSearch/tree/master/docs/class_diagram_final)
+
+[Javadoc](https://felixlimanta.github.io/GitSearch/javadoc/index.html)
+
+[jar]: https://github.com/felixlimanta/GitSearch/raw/master/GitSearch.jar
 [ss001]: docs/readme_resources/screenshot_001.png
 [ss002]: docs/readme_resources/screenshot_002.png
 [ss003]: docs/readme_resources/screenshot_003.png
